@@ -1,2 +1,2 @@
-# 42_FT_UTILS
+# 42_utils
 my original C library
