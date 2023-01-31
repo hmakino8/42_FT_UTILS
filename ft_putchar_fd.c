@@ -6,33 +6,13 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:53:13 by hiroaki           #+#    #+#             */
-/*   Updated: 2022/03/09 16:57:44 by hmakino          ###   ########.fr       */
+/*   Updated: 2023/01/31 23:25:08 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_utils.h"
 
-void	ft_putchar_fd(char c, int fd)
+ssize_t	ft_putchar_fd(char ch, int fd)
 {
-	write (fd, &c, 1);
+	return (write (fd, &ch, sizeof(char)));
 }
-
-// #include <stdio.h>
-// #include <string.h>
-// #include <fcntl.h>
-
-// int main(void)
-// {
-//     const char* filename = "42tokyo.txt";
-
-//     int fd = open(filename, O_WRONLY);
-//     if (fd == -1) {
-//         perror("open");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     ft_putchar_fd('!', fd);
-
-//     close(fd);
-//     exit(EXIT_SUCCESS);
-// }

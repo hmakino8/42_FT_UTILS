@@ -6,25 +6,25 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:47:36 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/01/30 16:11:49 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/01/31 19:04:32 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_utils.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *vptr, int ch, size_t len)
 {
 	size_t			i;
-	unsigned char	*ub;
-	unsigned char	uc;
+	unsigned char	*ustr;
+	unsigned char	uch;
 
-	ub = (unsigned char *)b;
-	uc = (unsigned char)c;
+	ustr = (unsigned char *)vptr;
+	uch = (unsigned char)ch;
 	i = 0;
 	while (i < len)
 	{
-		ub[i] = uc;
+		ustr[i] = uch;
 		i++;
 	}
-	return (b);
+	return (vptr);
 }

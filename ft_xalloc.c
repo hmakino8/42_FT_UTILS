@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:45:05 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/01/31 03:55:20 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/01/31 19:27:41 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,33 @@ void	*ft_error_handler(char *funcname, int e)
 void	*ft_xcalloc(size_t count, size_t size)
 {
 	size_t	total;
-	void	*ptr;
+	void	*vptr;
 
-	if (size && count > SIZE_MAX / size)
-		error_handler("ft_xcalloc", ENOMEM);
-	total = count * size;
-	if (total == 0)
-		total = 1;
-	ptr = malloc(total);
-	if (ptr == NULL)
+	vptr = ft_calloc(count, size);
+	if (vptr == NULL)
 		error_handler("ft_xcalloc", errno);
-	ft_bzero(ptr, total);
-	return (ptr);
+	return (vptr);
 }
 
 void	*ft_xmalloc(size_t size)
 {
-	void	*ptr;
+	void	*vptr;
 
-	ptr = malloc(size);
-	if (ptr == NULL)
+	vptr = malloc(size);
+	if (vptr == NULL)
 		error_handler("ft_xmalloc", errno);
-	return (ptr);
+	return (vptr);
 }
 
-void	*ft_xrealloc(void *ptr, size_t size)
+void	*ft_xrealloc(void *src, size_t size)
 {
 	size_t	size;
-	void	*ret;
+	void	*dst;
 
-	if (ptr == NULL)
+	if (src == NULL)
 		return (ft_xmalloc(size));
-	ret = ft_realloc(ptr, size);
-	if (ret == NULL)
+	dst = ft_realloc(src, size);
+	if (dst == NULL)
 		error_handler("ft_xmalloc", errno);
-	return (ret);
+	return (dst);
 }

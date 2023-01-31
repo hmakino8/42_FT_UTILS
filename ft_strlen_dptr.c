@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlen_dptr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 17:57:09 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/01/31 23:26:40 by hiroaki          ###   ########.fr       */
+/*   Created: 2023/01/31 15:53:36 by hiroaki           #+#    #+#             */
+/*   Updated: 2023/01/31 16:28:27 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_utils.h"
 
-ssize_t	ft_putstr_fd(char *str, int fd)
+size_t	ft_strlen_dptr(char **ptr)
 {
-	if (str == NULL)
-		return (-1);
-	return (write(fd, str, ft_strlen(str)));
+	size_t	i;
+
+	while (ptr[i])
+		i++;
+	return (i);
 }

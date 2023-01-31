@@ -6,15 +6,15 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:48:29 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/01/30 16:27:20 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/01/31 18:59:27 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_utils.h"
 
-int	ft_tolower(int c)
+int	ft_tolower(int ch)
 {
-	if ('A' <= c && c <= 'Z')
-		return (c + ('a' - 'A'));
-	return (c);
+	if ('A' <= ch && ch <= 'Z')
+		return (ch + ('a' - 'A'));
+	return (ch);
 }

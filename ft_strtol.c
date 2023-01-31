@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:44:45 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/01/31 14:48:22 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/01/31 21:33:58 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ static char	*parse_base(char *str, int *base)
 
 static int	conv_decimal_digit(char *str, char **endptr, int base)
 {
-	int	i;
+	int		i;
+	char	*base_char;
 
 	i = 0;
 	while (i < base)
 	{
-		if ("0123456789ABCDEF"[i] == ft_toupper(str[0]))
+		if (BASE[i] == ft_toupper(str[0]))
 			return (i);
 		i++;
 	}

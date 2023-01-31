@@ -6,15 +6,15 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:48:35 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/01/30 16:26:57 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/01/31 18:59:02 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_utils.h"
 
-int	ft_toupper(int c)
+int	ft_toupper(int ch)
 {
-	if ('a' <= c && c <= 'z')
-		return (c - ('a' - 'A'));
-	return (c);
+	if ('a' <= ch && ch <= 'z')
+		return (ch - ('a' - 'A'));
+	return (ch);
 }

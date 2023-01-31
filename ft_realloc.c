@@ -6,28 +6,27 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:45:05 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/01/31 01:50:56 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/01/31 19:19:06 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_utils.h"
 
-void	*ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *src, size_t size)
 {
-	size_t	size;
-	void	*ret;
+	void	*dst;
 
 	if (size == 0)
 	{
-		free(ptr);
+		free(src);
 		return (ft_strdup(""));
 	}
-	if (ptr == NULL)
+	if (src == NULL)
 		return (malloc(size));
-	ret = malloc(size);
-	if (ret == NULL)
+	dst = malloc(size);
+	if (dst == NULL)
 		return (NULL);
-	ft_memcpy(ret, ptr, size);
-	free(ptr);
-	return (ret);
+	ft_memcpy(dst, src, size);
+	free(src);
+	return (dst);
 }
