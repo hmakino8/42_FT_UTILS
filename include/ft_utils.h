@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:48:09 by hmakino           #+#    #+#             */
-/*   Updated: 2023/01/31 23:37:36 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/01 22:49:20 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	*ft_xcalloc(size_t count, size_t size);
 void	*ft_xmalloc(size_t size);
 void	*ft_xrealloc(void *ptr, size_t size);
 void	*ft_error_handler(char *funcname, int e);
+void	*ft_free(void *vptr);
 void	*ft_free_dptr(void **dptr, size_t n);
+int		free_error_exit(char *str);
 int		ft_atoi(const char *str);
 long	ft_strtol(const char *str, char **endptr, int base);
 char	*ft_itoa(int n);
