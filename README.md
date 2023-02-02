@@ -1,2 +1,2 @@
-# 42_utils
+# MyLibc
 my original C library
