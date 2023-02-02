@@ -1,43 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_helper.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/18 04:28:39 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/02 23:39:47 by hiroaki          ###   ########.fr       */
+/*   Created: 2023/02/01 22:14:19 by hiroaki           #+#    #+#             */
+/*   Updated: 2023/02/03 05:47:22 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+int	joint_buffer(char **stk, char *buf)
 {
-	int			loc;
-	int			sig;
-	char		*line;
-	static char	*stk[OPEN_MAX];
+	char	*tmp;
 
-	line = NULL;
-	sig = NORMAL;
-	if (validation(BUFFER_SIZE, fd) < 0 ||
-		search_line_feed(&stk[fd], fd, &loc, &sig) < 0 ||
-		split_buffer(&stk[fd], &line, loc) < 0)
-		return (NULL);
-	if (sig == END_OF_FILE)
-		return (get_last_line(stk, &line, fd));
-	return (line);
-}
-
-static int	validation(int bufsize, int fd)
-{
-	if (BUFFER_SIZE <= 0 || fd < 0 || OPEN_MAX < fd)
+	tmp = ft_strjoin(*stk, buf);
+	ft_free(*stk);
+	ft_free(buf);
+	if (tmp == NULL)
 		return (-1);
+	*stk = tmp;
 	return (0);
 }
 
-static int	search_line_feed(char **stk, int fd, int *loc, int *sig)
+int	load_buffer(char **stk, int fd, int *sig)
+{
+	ssize_t	byte;
+	char	*buf;
+
+	buf = ft_calloc(BUFFER_SIZE + 1UL, sizeof(char));
+	if (buf == NULL)
+		return (free_error_exit(*stk));
+	byte = read(fd, buf, BUFFER_SIZE);
+	if (byte <= 0)
+	{
+		ft_free(buf);
+		if (byte < 0)
+			return (free_error_exit(*stk));
+		else
+			*sig = END_OF_FILE;
+		return (0);
+	}
+	return (joint_buffer(stk, buf));
+}
+
+int	search_line_feed(char **stk, int fd, int *loc, int *sig)
 {
 	char	*tmp;
 
@@ -60,7 +69,7 @@ static int	search_line_feed(char **stk, int fd, int *loc, int *sig)
 	return (0);
 }
 
-static int	split_buffer(char **stk, char **line, int loc)
+int	split_buffer(char **stk, char **line, int loc)
 {
 	size_t	len;
 	char	*tmp;
@@ -72,19 +81,19 @@ static int	split_buffer(char **stk, char **line, int loc)
 		return (free_error_exit(*stk));
 	len = ft_strlen(*stk) - loc;
 	tmp = ft_substr(*stk, loc, len);
-	free(*stk);
+	ft_free(*stk);
 	if (tmp == NULL)
 		return (-1);
 	*stk = tmp;
 	return (0);
 }
 
-static char	*get_last_line(char **stk, char **line, int fd)
+char	*get_last_line(char **stk, char **line, int fd)
 {
 	if (stk[fd] != NULL && *stk[fd] == '\0')
 		;
 	else
 		*line = ft_strdup(stk[fd]);
-	free(stk[fd]);
+	ft_free(stk[fd]);
 	return (*line);
 }

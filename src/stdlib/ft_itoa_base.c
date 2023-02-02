@@ -6,18 +6,18 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 09:01:40 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 02:06:57 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 04:04:29 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_stdlib.h"
 
-static int	digit_cnt(unsigned int un, int base)
+static int	digit_cnt(unsigned int un, unsigned int base)
 {
 	int	digit;
 
 	digit = 1;
-	while (base <= un)
+	while (un >= base)
 	{
 		un /= base;
 		digit++;
@@ -45,7 +45,7 @@ static char	*make_array(unsigned int un, int len, int base, bool is_neg)
 	return (ptr);
 }
 
-char	*ft_itoa_base(int n, int base)
+char	*ft_itoa_base(int n, unsigned int base)
 {
 	int				len;
 	unsigned int	un;

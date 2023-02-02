@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:36:17 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/01 22:26:54 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 05:47:42 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <limits.h>
-# include "ft_utils.h"
+# include "ft_string.h"
+# include "ft_stdlib.h"
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 256
@@ -33,13 +34,12 @@
 
 /* get_next_line.c */
 char	*get_next_line(int fd);
-int		validation(int bufsize, int fd);
+
+/* get_next_line_helper.c */
+int		joint_buffer(char **stk, char *buf);
+int		load_buffer(char **stk, int fd, int *sig);
 int		search_line_feed(char **stk, int fd, int *loc, int *sig);
 int		split_buffer(char **stk, char **line, int loc);
 char	*get_last_line(char **stk, char **line, int fd);
-
-/* get_next_line_utils.c */
-int		joint_buffer(char **stk, char *buf);
-int		load_buffer(char **stk, int fd, int *sig);
 
 #endif

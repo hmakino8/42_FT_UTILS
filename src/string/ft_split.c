@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:30:41 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 01:56:52 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 04:13:26 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ static t_list	*tokenize(t_list *lst, char const *str, char const *delim)
 static char	**lst_to_dptr(t_list *lst, char **dptr, size_t n)
 {
 	size_t	i;
-	t_list	*head;
 
-	head = lst;
 	i = 0;
 	while (lst)
 	{

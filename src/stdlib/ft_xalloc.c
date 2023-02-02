@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:45:05 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 02:02:57 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 04:09:46 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*ft_error_handler(char *funcname, int e)
 
 void	*ft_xcalloc(size_t count, size_t size)
 {
-	size_t	total;
 	void	*vptr;
 
 	vptr = ft_calloc(count, size);
@@ -43,7 +42,6 @@ void	*ft_xmalloc(size_t size)
 
 void	*ft_xrealloc(void *src, size_t size)
 {
-	size_t	size;
 	void	*dst;
 
 	if (src == NULL)

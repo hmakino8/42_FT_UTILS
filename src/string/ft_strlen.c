@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:15:26 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 01:44:35 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 04:15:18 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 size_t	ft_strlen(const char *str)
 {
-	size_t	len;
+	size_t	i;
 
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 size_t	ft_strlen_dptr(char **ptr)
 {
 	size_t	i;
 
+	i = 0;
 	while (ptr[i])
 		i++;
 	return (i);

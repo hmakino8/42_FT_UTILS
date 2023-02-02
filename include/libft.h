@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:48:09 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 02:13:38 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 05:42:45 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # include "ft_stdlib.h"
 # include "ft_stdio.h"
 # include "ft_linkedlist.h"
+# include "get_next_line.h"
 
 #endif

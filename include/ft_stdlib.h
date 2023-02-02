@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:48:09 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 02:07:11 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 04:05:48 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <limits.h>
+# include "ft_ctype.h"
 # include "ft_string.h"
 
 # define BASE "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -34,6 +35,6 @@ int		free_error_exit(char *str);
 int		ft_atoi(const char *str);
 long	ft_strtol(const char *str, char **endptr, int base);
 char	*ft_itoa(int n);
-char	*ft_itoa_base(int n, int base);
+char	*ft_itoa_base(int n, unsigned int base);
 
 #endif

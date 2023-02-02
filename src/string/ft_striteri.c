@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:12:25 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 01:46:44 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/03 04:14:01 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_striteri(char *str, void (*f)(unsigned int, char *))
 	i = 0;
 	while (str[i] != '\0')
 	{
-		(*f)(i, str[i]);
+		(*f)(i, &str[i]);
 		i++;
 	}
 }
