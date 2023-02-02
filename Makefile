@@ -6,7 +6,7 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/03 05:39:48 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/03 05:57:01 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,6 @@ STRINGDIR		:=	$(SRCDIR)/string/
 CTYPE			:=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_isspace.c \
 					ft_tolower.c ft_toupper.c
 CTYPEDIR		:=	$(SRCDIR)/ctype/
-
-GNLDIR			:=
 
 STDIO			:=	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
 					get_next_line.c get_next_line_helper.c
