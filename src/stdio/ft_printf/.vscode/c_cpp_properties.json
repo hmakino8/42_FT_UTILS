@@ -4,7 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/Users/hiroaki/github.com/42tokyo/42cursus/42_ft_printf/ft_printf/include",
+                "/Users/hiroaki/github.com/42tokyo/42cursus/mylibc/include",
                 "/usr/local/Cellar/llvm/15.0.6/include/c++/v1",
                 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
             ],

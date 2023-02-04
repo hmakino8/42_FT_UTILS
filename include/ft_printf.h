@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:34:07 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 00:56:09 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/05 03:11:25 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,51 +19,54 @@
 # include <stdarg.h>
 # include <limits.h>
 # include <stdbool.h>
+# include <sys/stat.h>
+# include "ft_stdio.h"
+# include "ft_stdlib.h"
+# include "get_next_line.h"
 
-typedef enum s_printf_bitflag
+# define BUF "./temp_buffer"
+
+typedef enum s_printf_flag
 {
 	ZERO = (1 << 0),
 	ALIGN = (1 << 1),
 	PLUS = (1 << 2),
 	SPACE = (1 << 3),
-	SHARP = (1 << 4)
+	SHARP = (1 << 4),
+	HAS_WIDTH = (1 << 5),
+	HAS_PREC = (1 << 6),
+	HAS_SPEC = (1 << 7),
+	SPEC_C = (1 << 8),
+	SPEC_S = (1 << 9),
+	SPEC_PCT = (1 << 10),
+	SPEC_IDPUX = (1 << 11),
+	IS_NEGATIVE = (1 << 12),
+	PADDING_SPACE = (1 << 13)
 }	t_flag;
 
 typedef struct s_printf_info
 {
 	int				width;
+	int				prec;
 	int				spec;
-	int				spec_cs;
+	int				base;
 	int				sign;
-	int				digit_width;
-	int				digit_prec;
-	int				has_prec;
-	int				check_overflow;
-	bool			overflow;
-	size_t			prec;
-	size_t			base;
-	size_t			idx;
+	unsigned int	bitflag;
+	size_t			width_len;
+	size_t			prec_len;
 	size_t			len;
-	size_t			total_output;
-	unsigned char	ch;
-	t_flag			flag;
 }	t_info;
 
-//ft_printf.c
-int				ft_printf(const char *fmt, ...);
-void			initialize_info(t_info *i);
-//output.c
-void			output(unsigned char *args, t_info *i);
-void			specifier_percent_c(va_list ap, t_info *i);
-void			specifier_s(va_list ap, t_info *i);
-void			specifier_idupx(va_list ap, t_info *i);
-//scrape.c
-void			scrape_hub(va_list ap, const char *s1, t_info *i);
-//utils.c
-int				ft_putchar(const unsigned char c, t_info *i);
-int				ft_atoi(const char *s1, t_info *i);
-int				ft_get_digit(unsigned long num, t_info *i);
-unsigned long	is_neg(int n, t_info *i);
-unsigned char	*ft_itoa_base(unsigned long num, t_info *i);
-
+/* ft_printf.c */
+int		ft_printf(const char *fmt, ...);
+/* ft_vdprintf.c */
+int		ft_vdprintf(int fd, char *fmt, va_list arg);
+/* ft_dprintf.c */
+int		ft_dprintf(int fd, const char *fmt, ...);
+/* internal_printf.c */
+int		internal_printf(int *fd, char *fmt, va_list arg);
+/* write_to_fd.c */
+ssize_t	buffering(int fd, t_info *info, va_list arg);
+/* printf_helper.c */
+bool	is_overflow(size_t len);
 #endif

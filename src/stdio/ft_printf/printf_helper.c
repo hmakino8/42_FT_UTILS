@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   printf_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 15:15:26 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 15:26:25 by hiroaki          ###   ########.fr       */
+/*   Created: 2023/02/05 02:56:23 by hiroaki           #+#    #+#             */
+/*   Updated: 2023/02/05 02:56:43 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_string.h"
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+bool	is_overflow(size_t len)
 {
-	const char	*start;
-
-	start = str;
-	while (*str)
-		str++;
-	return (str - start);
-}
-
-size_t	ft_strlen_dptr(char **ptr)
-{
-	size_t	i;
-
-	i = 0;
-	while (ptr[i])
-		i++;
-	return (i);
+	if (len > (size_t) INT_MAX)
+	{
+		errno = EOVERFLOW;
+		return (true);
+	}
+	return (false);
 }

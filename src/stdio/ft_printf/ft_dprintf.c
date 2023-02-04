@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 15:15:26 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 15:26:25 by hiroaki          ###   ########.fr       */
+/*   Created: 2022/04/03 04:24:44 by hmakino           #+#    #+#             */
+/*   Updated: 2023/02/05 03:08:45 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_string.h"
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_dprintf(int fd, const char *fmt, ...)
 {
-	const char	*start;
+	va_list	arg;
+	int		done;
 
-	start = str;
-	while (*str)
-		str++;
-	return (str - start);
-}
-
-size_t	ft_strlen_dptr(char **ptr)
-{
-	size_t	i;
-
-	i = 0;
-	while (ptr[i])
-		i++;
-	return (i);
+	va_start(arg, fmt);
+	done = ft_vdprintf(fd, fmt, arg);
+	va_end(arg);
+	return (done);
 }
