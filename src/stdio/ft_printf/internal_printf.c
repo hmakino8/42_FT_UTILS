@@ -6,11 +6,13 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:24:44 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/05 02:58:34 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/05 17:07:17 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "../../../include/ft_printf.h"
+#include <sys/fcntl.h>
 
 static void	init_info(t_info *info)
 {
@@ -38,30 +40,34 @@ static int creat_fd(int *fd)
 		return (-1);
 	}
 	errno = e;
-	*fd = open(BUF, O_CREAT | O_WRONLY, 0644);
+	*fd = open(BUF, O_CREAT | O_RDWR, 0644);
 	if (*fd < 0)
-	reutrn (-1);
+		return (-1);
+	return (0);
 }
 
-int	internal_printf(int *fd, char *fmt, va_list arg)
+int	internal_printf(int *fd, const char *fmt, va_list arg)
 {
 	ssize_t	bufsize;
-	t_info	*info;
+	t_info	info;
 
-	if (creat_fd(fd) < 0)
-		return (-1);
+	//if (creat_fd(fd) < 0)
+	//	return (-1);
+	*fd = 1;
+	bufsize = 0;
 	while (*fmt)
 	{
-		init_info(info);
+		init_info(&info);
 		if (*fmt != '%')
 			bufsize += ft_putchar_fd(*fmt, *fd);
-		else if (*++fmt)
+		else if (*fmt++)
 		{
-			fmt = parse_flag(fmt, info);
-			fmt = parse_width_precision(fmt, info, arg);
-			fmt = parse_spec(fmt, info, arg);
-			bufsize += buffering(fd, info, arg);
+			fmt = parse_flag(fmt, &info);
+			fmt = parse_width_precision(fmt, &info, arg);
+			fmt = parse_specific(fmt, &info, arg);
+			bufsize += buffering(*fd, &info, arg);
 		}
+		fmt++;
 		if (is_overflow(bufsize))
 			return (EOF);
 	}

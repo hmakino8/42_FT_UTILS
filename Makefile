@@ -6,7 +6,7 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/03 05:57:01 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/05 04:06:53 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,14 @@ CTYPE			:=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_i
 					ft_tolower.c ft_toupper.c
 CTYPEDIR		:=	$(SRCDIR)/ctype/
 
+PRINTF			:=	parse_fmt.c printf_helper.c process_specifer.c internal_printf.c write_to_fd.c \
+					ft_printf.c ft_dprintf.c ft_vdprintf.c
+PRINTFDIR		:=	$(SRCDIR)/stdio/ft_printf
+
+GNL				:=	get_next_line.c get_next_line_helper.c
+GNLDIR			:=	$(SRCDIR)/stdio/get_next_line
+
 STDIO			:=	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-					get_next_line.c get_next_line_helper.c
 STDIODIR		:=	$(SRCDIR)/stdio/
 
 OBJDIR			:=	./obj
@@ -43,6 +49,8 @@ OBJS			:=	$(addprefix $(STDLIBDIR), $(notdir $(STDLIB:%.c=%.o))) \
 					$(addprefix $(STRINGDIR), $(notdir $(STRING:%.c=%.o))) \
 					$(addprefix $(CTYPEDIR), $(notdir $(CTYPE:%.c=%.o))) \
 					$(addprefix $(STDIODIR), $(notdir $(STDIO:%.c=%.o))) \
+					$(addprefix $(PRINTFDIR), $(notdir $(PRNTF:%.c=%.o))) \
+					$(addprefix $(GNLDIR), $(notdir $(GNL:%.c=%.o))) \
 					$(addprefix $(OBJS), $(notdir $(OBJS:%.c=%.o)))
 
 $(NAME): $(OBJS)

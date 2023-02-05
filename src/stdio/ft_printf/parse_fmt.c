@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write_to_fd.c                                      :+:      :+:    :+:   */
+/*   parse_fmt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:36:46 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/04 22:50:36 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/05 17:44:28 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../../../include/ft_printf.h"
 
-char	*parse_flag(const char *fmt, t_info *info)
+const char	*parse_flag(const char *fmt, t_info *info)
 {
-	while (ft_strchr("-+ ", *fmt) == 0)
+	while (ft_strchr("-+ ", *fmt))
 	{
 		if (*fmt == '-')
 			info->bitflag |= ALIGN;
@@ -39,7 +39,7 @@ char	*parse_flag(const char *fmt, t_info *info)
 	return (fmt);
 }
 
-char	*parse_width_precision(const char *fmt, t_info *info, va_list arg)
+const char	*parse_width_precision(const char *fmt, t_info *info, va_list arg)
 {
 	if (*fmt == '*')
 	{
@@ -48,7 +48,7 @@ char	*parse_width_precision(const char *fmt, t_info *info, va_list arg)
 	}
 	while (ft_isdigit(*fmt))
 	{
-		info->width += info->width * 10 + (*fmt++ + '0');
+		info->width = info->width * 10 + (*fmt++ - '0');
 		info->width_len++;
 	}
 	if (*fmt == '.')
@@ -61,19 +61,21 @@ char	*parse_width_precision(const char *fmt, t_info *info, va_list arg)
 		}
 		while (ft_isdigit(*fmt))
 		{
-			info->prec += info->prec * 10 + (*fmt++ + '0');
+			info->prec = info->prec * 10 + (*fmt++ - '0');
 			info->prec_len++;
 		}
+		if (info->prec_len == 0)
+			info->prec_len = 1;
 	}
 	return (fmt);
 }
 
-char	*parse_spec(const char *fmt, t_info *info, va_list arg)
+const char	*parse_specific(const char *fmt, t_info *info, va_list arg)
 {
-	if (ft_strchr(*fmt, "%csidupxX") != 0)
+	if (ft_strchr("%csidupxX", *fmt) == 0)
 		return (fmt);
 	info->spec = *fmt;
-	if (ft_strchr(*fmt, "%cs") == 0)
+	if (ft_strchr("%cs", *fmt))
 	{
 		if (*fmt == '%')
 			info->bitflag |= SPEC_PCT;
@@ -84,7 +86,7 @@ char	*parse_spec(const char *fmt, t_info *info, va_list arg)
 	}
 	else
 	{
-		if (ft_strchr(*fmt, "pxX") == 0)
+		if (ft_strchr("pxX", *fmt))
 			info->base = 16;
 		info->bitflag |= SPEC_IDPUX;
 	}

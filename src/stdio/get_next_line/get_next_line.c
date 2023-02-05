@@ -6,11 +6,11 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:28:39 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 05:47:06 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/05 15:25:40 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../../include/get_next_line.h"
 
 char	*get_next_line(int fd)
 {
