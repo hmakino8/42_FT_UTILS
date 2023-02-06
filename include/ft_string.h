@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:48:09 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/03 04:16:25 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 02:35:54 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_STRING_H
 
 # include <stdlib.h>
-# include "ft_linkedlist.h"
 
 # ifndef TRUE
  # define TRUE 1
@@ -39,7 +38,7 @@ char	*ft_substr(char const *str, unsigned int start, size_t len);
 char	*ft_strjoin(char const *str1, char const *str2);
 char	*ft_strtrim(char const *str, char const *set);
 char	*ft_strmapi(char const *str, char (*f)(unsigned int, char));
-char	**ft_split(char const *str, char const *delim);
+char	**ft_split(char const *str, char ch);
 void	ft_bzero(void *s, size_t n);
 
 #endif

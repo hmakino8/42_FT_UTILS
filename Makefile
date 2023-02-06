@@ -6,12 +6,12 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/06 19:48:28 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/06 21:18:00 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=	libft.a
-CFLAGS			:=	-Wall -Wextra -Werror -I./include
+CFLAGS			:=	-I./include #-Wall -Wextra -Werror -I./include
 
 SRCDIR			:=	./src
 OBJDIR			:=	./obj

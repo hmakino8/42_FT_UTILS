@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 23:27:00 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 01:45:50 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 01:19:04 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	src_len;
 	size_t	cat_len;
 
-	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
+	if (dst == NULL)
+		return (src_len);
+	dst_len = ft_strlen(dst);
 	if (dstsize <= dst_len)
 		return (dstsize + src_len);
 	cat_len = (dstsize - 1) - dst_len;

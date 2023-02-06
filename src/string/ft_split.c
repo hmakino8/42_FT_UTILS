@@ -6,88 +6,67 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:30:41 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 04:13:26 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 02:18:46 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_string.h"
 
-static t_list	*add_lst(t_list **lst, char const *str, size_t len)
+static size_t	count_elem(char const *str, char ch)
 {
-	t_list	*new;
-	char	*tmp;
+	size_t	n;
 
-	tmp = ft_substr(str, 0, len);
-	if (!tmp)
-		return (NULL);
-	new = ft_lstnew(tmp);
-	if (!new)
-		return (NULL);
-	new->len = len;
-	ft_lstadd_back(lst, new);
-	return (*lst);
-}
-
-static t_list	*tokenize(t_list *lst, char const *str, char const *delim)
-{
-	size_t	len;
-	size_t	dlen;
-	char	*find;
-
-	dlen = ft_strlen(delim);
-	while (TRUE)
+	n = 0;
+	while (*str != '\0')
 	{
-		while (ft_strncmp(str, delim, dlen) == 0)
-			str += dlen;
-		len = ft_strlen(str);
-		if (len == 0)
-			break ;
-		find = ft_strnstr(str, delim, len);
-		if (find)
-			len = find - str;
-		if (!add_lst(&lst, str, len))
-			return (NULL);
-		if (!find)
-			break ;
-		str = find + dlen;
+		if (*str++ != ch)
+		{
+			n++;
+			while (*str != '\0' && *str != ch)
+				str++;
+		}
 	}
-	return (lst);
+	return (n);
 }
 
-static char	**lst_to_dptr(t_list *lst, char **dptr, size_t n)
+static char	**split_str(char const *str, char **dptr, char ch, size_t n)
 {
 	size_t	i;
+	size_t	len;
 
+	if (str == NULL)
+		return (NULL);
 	i = 0;
-	while (lst)
+	while (*str != '\0' && i < n)
 	{
-		dptr[i] = ft_strdup(lst->content);
-		if (!dptr[i])
-			return (ft_free_dptr((void **)dptr, n));
-		i++;
-		lst = lst->next;
+		len = 0;
+		while (*str != '\0' && *str == ch)
+			str++;
+		while (str[len] != '\0' && str[len] != ch)
+			len++;
+		if (len > 0)
+		{
+			dptr[i] = ft_substr(str, 0, len);
+			if (dptr[i] == NULL)
+				return (NULL);
+			i++;
+		}
+		str += len;
 	}
 	return (dptr);
 }
 
-char	**ft_split(char const *str, char const *delim)
+char	**ft_split(char const *str, char ch)
 {
-	size_t		n;
-	char		**dptr;
-	t_list		*lst;
+	size_t	n;
+	char	**dptr;
 
-	if (!str || !delim)
+	if (str == NULL)
 		return (NULL);
-	lst = tokenize(NULL, str, delim);
-	if (!lst)
-		return (NULL);
-	n = ft_lstsize(lst);
-	dptr = malloc((n + 1) * sizeof(char *));
-	if (dptr)
-	{
-		dptr[n] = NULL;
-		dptr = lst_to_dptr(lst, dptr, n);
-	}
-	ft_lstclear(&lst, free);
+	n = count_elem(str, ch);
+	dptr = ft_calloc((n + 1), sizeof(char *));
+	dptr = split_str(str, dptr, ch, n);
+	if (dptr == NULL)
+		ft_free_dptr((void **)dptr, n);
 	return (dptr);
 }

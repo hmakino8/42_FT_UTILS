@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 17:51:03 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 02:14:21 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 02:48:43 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_lstsize(t_list *lst)
 	int	i;
 
 	i = 0;
-	while (lst)
+	while (lst != NULL)
 	{
 		lst = lst->next;
 		i++;
