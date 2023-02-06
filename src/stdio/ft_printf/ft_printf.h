@@ -6,7 +6,7 @@
 /*   By: hmakino <hmakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:34:07 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/06 01:42:13 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/06 02:06:18 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
+# include <errno.h>
+# include <sys/fcntl.h>
+# include <sys/stat.h>
 # include "../../../include/libft.h"
+
+#define BUF "./printf_temp_buf"
 
 typedef struct s_printf_info
 {
@@ -42,7 +47,7 @@ typedef struct s_printf_info
 int				ft_printf(const char *fmt, ...);
 void			init_info(t_info *info);
 //output.c
-size_t 			process_spec(va_list ap, t_info *info);
+size_t 			process_spec(va_list ap, int fd, t_info *info);
 //scrape.c
 const char		*parse_flag(const char *fmt, t_info *info);
 const char		*parse_width_prec(va_list ap, const char *fmt, t_info *info);

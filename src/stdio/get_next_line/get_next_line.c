@@ -6,11 +6,11 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:28:39 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/05 15:25:40 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/06 19:17:23 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/get_next_line.h"
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
@@ -26,6 +26,19 @@ char	*get_next_line(int fd)
 		split_buffer(&stk[fd], &line, loc) < 0)
 		return (NULL);
 	if (sig == END_OF_FILE)
-		return (get_last_line(stk, &line, fd));
+	{
+		if (*stk[fd] != '\0')
+		{
+			line = ft_strdup(stk[fd]);
+			stk[fd] = NULL;
+			return (line);
+		}
+		else
+			return (NULL);
+		//if (*stk[fd] == '\0')
+		//	stk[fd] = NULL;
+		//line = ft_strdup(stk[fd]);
+		//stk[fd] = NULL;
+	}
 	return (line);
 }

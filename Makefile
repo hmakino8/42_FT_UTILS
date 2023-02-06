@@ -6,7 +6,7 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/05 23:23:36 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/06 19:48:28 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS			:= 	$(addprefix $(STDLIBDIR), $(notdir $(STDLIB:%.c=%.o)))
 LINKEDLIST		:=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 					ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 LINKEDLISTDIR	:=	$(SRCDIR)/linkedlist/
-OBJS			+= 	$(addprefix $(LINKEDLISTDIR), $(notdir $(LINKEDLIST:%.c=%.o)))
+#OBJS			+= 	$(addprefix $(LINKEDLISTDIR), $(notdir $(LINKEDLIST:%.c=%.o)))
 
 STRING			:=	ft_bzero.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
 					ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
@@ -41,6 +41,12 @@ OBJS			+=	$(addprefix $(CTYPEDIR), $(notdir $(CTYPE:%.c=%.o)))
 STDIO			:=	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c
 STDIODIR		:=	$(SRCDIR)/stdio/
 OBJS			+=	$(addprefix $(STDIODIR), $(notdir $(STDIO:%.c=%.o)))
+BONUS_OBJS		:= 	$(addprefix $(LINKEDLISTDIR), $(notdir $(LINKEDLIST:%.c=%.o)))
+
+
+ifdef WITH_BONUS
+OBJS += $(BONUS_OBJS)
+endif
 
 all:	$(NAME)
 
@@ -52,11 +58,14 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean:	clean
 	@$(RM) $(NAME)
 
 re:	fclean $(NAME)
 
-.PHONY:	all clean fclean re
+bonus: 
+	make WITH_BONUS=1
+
+.PHONY:	all clean fclean re bonus

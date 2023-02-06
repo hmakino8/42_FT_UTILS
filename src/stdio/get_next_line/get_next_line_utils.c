@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_helper.c                             :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 22:14:19 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/05 16:08:04 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/06 19:17:32 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/get_next_line.h"
+#include "get_next_line.h"
 
 int	joint_buffer(char **stk, char *buf)
 {
@@ -86,16 +86,4 @@ int	split_buffer(char **stk, char **line, int loc)
 		return (-1);
 	*stk = tmp;
 	return (0);
-}
-
-char	*get_last_line(char **stk, char **line, int fd)
-{
-	if (stk[fd] != NULL && *stk[fd] == '\0')
-		;
-	else
-	{
-		*line = ft_strdup(stk[fd]);
-		ft_free(stk[fd]);
-	}
-	return (*line);
 }

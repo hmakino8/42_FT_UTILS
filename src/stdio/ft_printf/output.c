@@ -6,19 +6,17 @@
 /*   By: hmakino <hmakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:29:38 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/06 01:46:43 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/06 02:20:37 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	buffering(char *str, t_info *info)
+static size_t	buffering(char *str, int fd, t_info *info)
 {
-	int fd;
 	size_t	len;
 
 	len = 0;
-	fd = STDOUT_FILENO;
 	while (!info->flag_align && !info->flag_zero && 0 < info->width--)
 		len += ft_putchar_fd(' ', fd);
 	if (!info->spec_cs)
@@ -108,7 +106,7 @@ static char	*spec_i_d_u_p_x_X(va_list ap, t_info *info)
 	return (str);
 }
 
-size_t 	process_spec(va_list ap, t_info *info)
+size_t 	process_spec(va_list ap, int fd, t_info *info)
 {
 	size_t	len;
 	char	*str;
@@ -121,7 +119,7 @@ size_t 	process_spec(va_list ap, t_info *info)
 		str = spec_i_d_u_p_x_X(ap, info);
 	else
 		return (0);
-	len = buffering(str, info);
+	len = buffering(str, fd, info);
 	ft_free(str);
 	return (len);
 }

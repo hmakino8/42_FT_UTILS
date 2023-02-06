@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:36:17 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/06 14:31:48 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/06 19:18:37 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <limits.h>
-# include "ft_string.h"
-# include "ft_stdlib.h"
+# include "../../../include/ft_string.h"
+# include "../../../include/ft_stdlib.h"
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 256
