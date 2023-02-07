@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:34:07 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 02:57:15 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 03:12:58 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <sys/stat.h>
 # include <stdbool.h>
 # include "ft_stdio.h"
-# include "get_next_line.h"
 
 #define BUF "./printf_temp_buf"
 
