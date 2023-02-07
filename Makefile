@@ -6,7 +6,7 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/07 22:42:53 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/08 02:52:46 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,15 @@ CTYPE			:=	src/ctype/ft_isalnum.c \
 STDIO			:=	src/stdio/ft_putchar_fd.c \
 					src/stdio/ft_putendl_fd.c \
 					src/stdio/ft_putnbr_fd.c \
-					src/stdio/ft_putstr_fd.c
+					src/stdio/ft_putstr_fd.c \
+					src/stdio/get_next_line/get_next_line.c \
+					src/stdio/ft_printf/ft_printf.c \
+					src/stdio/ft_printf/ft_dprintf.c \
+					src/stdio/ft_printf/ft_vdprintf.c \
+					src/stdio/ft_printf/internal_printf.c \
+					src/stdio/ft_printf/ft_printf-parse.c \
+					src/stdio/ft_printf/ft_printf-utils.c \
+					src/stdio/ft_printf/ft_printf-buffering.c
 
 SRCS			=	$(STDLIB) $(LINKEDLIST) $(STRING) $(CTYPE) $(STDIO)
 OBJS			=	$(SRCS:%.c=$(OBJDIR)/%.o)
@@ -77,6 +85,7 @@ DEPS			=	$(OBJS:%.o=%.d)
 all:	$(NAME)
 
 $(NAME): $(OBJS)
+	@mkdir -p $(@D)
 	@ar -r $(NAME) $(OBJS)
 
 $(OBJDIR)/%.o: %.c
@@ -90,7 +99,4 @@ fclean:	clean
 
 re:	fclean $(NAME)
 
-test:
-	./test.sh
-
-.PHONY:	all clean fclean test re
+.PHONY:	all clean fclean re

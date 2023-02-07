@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scrape.c                                           :+:      :+:    :+:   */
+/*   ft_printf-parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmakino <hmakino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:36:46 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/06 01:43:54 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 02:40:48 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ const char *parse_width_prec(va_list ap, const char *fmt, t_info *info)
 	return (fmt);
 }
 
-const char	*parse_spec(va_list ap, const char *fmt, t_info *info)
+const char	*parse_spec(const char *fmt, t_info *info)
 {
 	if (!ft_strchr("%csidupxX", *fmt))
 		return (fmt);
@@ -94,4 +94,3 @@ const char	*parse_spec(va_list ap, const char *fmt, t_info *info)
 		info->base = 16;
 	return (fmt);
 }
-

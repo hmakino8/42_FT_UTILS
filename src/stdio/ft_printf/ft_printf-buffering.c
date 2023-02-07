@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.c                                           :+:      :+:    :+:   */
+/*   ft_printf-buffering.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmakino <hmakino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:29:38 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/06 02:20:37 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 02:57:52 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ static size_t	buffering(char *str, int fd, t_info *info)
 		len += ft_putchar_fd('0', fd);
 	while (0 < info->len--)
 		len += ft_putchar_fd(*str++, fd);
-	if (info->flag_align)
+	while (info->flag_align && 0 < info->width--)
 	{
-		while (0 < info->width--)
-		{
-			if (info->flag_zero)
-				len += ft_putchar_fd('0', fd);
-			else
-				len += ft_putchar_fd(' ', fd);
-		}
+		if (info->flag_zero)
+			len += ft_putchar_fd('0', fd);
+		else
+			len += ft_putchar_fd(' ', fd);
 	}
 	return (len);
 }
@@ -106,11 +103,12 @@ static char	*spec_i_d_u_p_x_X(va_list ap, t_info *info)
 	return (str);
 }
 
-size_t 	process_spec(va_list ap, int fd, t_info *info)
+ssize_t 	process_spec(va_list ap, int fd, t_info *info)
 {
 	size_t	len;
 	char	*str;
 
+	str = NULL;
 	if (ft_strchr("%c", info->spec))
 		str = spec_pct_c(ap, info);
 	else if (info->spec == 's')
@@ -119,7 +117,9 @@ size_t 	process_spec(va_list ap, int fd, t_info *info)
 		str = spec_i_d_u_p_x_X(ap, info);
 	else
 		return (0);
+	if (str == NULL)
+		return (-1);
 	len = buffering(str, fd, info);
-	ft_free(str);
+	ft_free((void **)&str);
 	return (len);
 }

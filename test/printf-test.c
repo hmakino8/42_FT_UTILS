@@ -1,9 +1,9 @@
-#include "ft_printf.h"
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "ft_printf.h"
 
 #ifdef FT_PRINTF
 # define F(...) \

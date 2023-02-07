@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_printf-utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmakino <hmakino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:37:34 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/06 00:47:37 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 02:50:29 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+bool 	is_overflow(size_t	len)
+{
+	if (len > (size_t) INT_MAX)
+	{
+		errno = EOVERFLOW;
+			return (true);
+	}
+	return (false);
+}
 
 unsigned long	is_neg(int n, t_info *i)
 {
@@ -61,7 +71,7 @@ char	*printf_itoa_base(unsigned long num, t_info *i)
 			str[len] -= ('a' - 'A');
 		num /= i->base;
 		i->len++;
-	}	
+	}
 	if ((i->flag_sharp && i->spec == 'x') || i->spec == 'p')
 		str[1] = 'x';
 	if (i->flag_sharp && i->spec == 'X')

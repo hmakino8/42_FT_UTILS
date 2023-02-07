@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:28:39 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 01:11:49 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 03:00:06 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_next_line(int fd)
 	if (sig == END_OF_FILE)
 	{
 		if (!(stk[fd] != NULL && *stk[fd] == '\0'))
-			line = ft_substr(stk[fd], 0, ft_strlen(stk[fd]));
+			line = ft_strdup(stk[fd]);
 		free(stk[fd]);
 		stk[fd] = NULL;
 	}
