@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:30:41 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/07 02:18:46 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 22:51:04 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ static size_t	count_elem(char const *str, char ch)
 	return (n);
 }
 
-static char	**split_str(char const *str, char **dptr, char ch, size_t n)
+static char	**split_str(char const *str, char ch, size_t n)
 {
 	size_t	i;
 	size_t	len;
+	char	**dptr;
 
-	if (str == NULL)
+	dptr = ft_calloc(n + 1, sizeof(char *));
+	if (dptr == NULL)
 		return (NULL);
 	i = 0;
 	while (*str != '\0' && i < n)
@@ -48,7 +50,7 @@ static char	**split_str(char const *str, char **dptr, char ch, size_t n)
 		{
 			dptr[i] = ft_substr(str, 0, len);
 			if (dptr[i] == NULL)
-				return (NULL);
+				ft_free_dptr((void ***)&dptr, i);
 			i++;
 		}
 		str += len;
@@ -59,14 +61,9 @@ static char	**split_str(char const *str, char **dptr, char ch, size_t n)
 char	**ft_split(char const *str, char ch)
 {
 	size_t	n;
-	char	**dptr;
 
 	if (str == NULL)
 		return (NULL);
 	n = count_elem(str, ch);
-	dptr = ft_calloc((n + 1), sizeof(char *));
-	dptr = split_str(str, dptr, ch, n);
-	if (dptr == NULL)
-		ft_free_dptr((void **)dptr, n);
-	return (dptr);
+	return (split_str(str, ch, n));
 }

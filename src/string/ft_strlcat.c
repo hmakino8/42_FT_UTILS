@@ -6,9 +6,18 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 23:27:00 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/07 01:19:04 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 16:38:01 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+ * SEGMENTATION FAULT
+ * case1: src = NULL
+ * case2: dst = NULL(except when dstsize is 0)
+ *
+ * RETURN VALUE
+ * dst_len + src_len or src_len(when dstsize is 0)
+*/
 
 #include "ft_string.h"
 
@@ -19,7 +28,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	cat_len;
 
 	src_len = ft_strlen(src);
-	if (dst == NULL)
+	if (dstsize == 0)
 		return (src_len);
 	dst_len = ft_strlen(dst);
 	if (dstsize <= dst_len)

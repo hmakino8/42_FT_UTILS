@@ -3,14 +3,11 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/Users/hiroaki/github.com/42tokyo/42cursus/mylibc/include",
-                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
-                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/mach"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "macFrameworkPath": [],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/local/opt/llvm/bin/clang",
             "cStandard": "c17",
             "cppStandard": "c++14",
             "intelliSenseMode": "macos-clang-x64"

@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:34:07 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/05 15:56:52 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 22:54:04 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,23 @@ typedef struct s_printf_info
 }	t_info;
 
 /* ft_printf.c */
-int				ft_printf(const char *fmt, ...);
+int			ft_printf(const char *fmt, ...);
 /* ft_vdprintf.c */
-int				ft_vdprintf(int fd, const char *fmt, va_list arg);
+int			ft_vdprintf(int fd, const char *fmt, va_list arg);
 /* ft_dprintf.c */
-int				ft_dprintf(int fd, const char *fmt, ...);
+int			ft_dprintf(int fd, const char *fmt, ...);
 /* internal_printf.c */
-int				internal_printf(int *fd, const char *fmt, va_list arg);
+int			internal_printf(int *fd, const char *fmt, va_list arg);
 /* parse_fmt.c */
-const char *parse_flag(const char *fmt, t_info *info);
-const char *parse_width_precision(const char *fmt, t_info *info, va_list arg);
-const char *parse_specific(const char *fmt, t_info *info, va_list arg);
+const char	*parse_flag(const char *fmt, t_info *info);
+const char	*parse_width_precision(const char *fmt, t_info *info, va_list arg);
+const char	*parse_specific(const char *fmt, t_info *info, va_list arg);
 /* process_specifer.c */
-char	*specifier_idupx(va_list arg, t_info *info);
-char	*specifier_percent_c(va_list ap, t_info *info);
-char	*specifier_s(va_list arg, t_info *info);
+char		*specifier_idupx(va_list arg, t_info *info);
+char		*specifier_percent_c(va_list ap, t_info *info);
+char		*specifier_s(va_list arg, t_info *info);
 /* write_to_fd.c */
-ssize_t			buffering(int fd, t_info *info, va_list arg);
+ssize_t		buffering(int fd, t_info *info, va_list arg);
 /* printf_helper.c */
-bool			is_overflow(size_t len);
+bool		is_overflow(size_t len);
 #endif

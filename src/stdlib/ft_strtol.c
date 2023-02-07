@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:44:45 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/03 04:06:21 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 16:53:31 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static int	conv_decimal_digit(char *str, char **endptr, int base)
 		i++;
 	}
 	errno = EINVAL;
-	*endptr = str;
+	if (endptr != NULL)
+		*endptr = str;
 	return (-1);
 }
 

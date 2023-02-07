@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:48:09 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/07 02:35:54 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/07 22:52:57 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define FT_STRING_H
 
 # include <stdlib.h>
+# include "ft_stdlib.h"
 
 # ifndef TRUE
- # define TRUE 1
+#  define TRUE 1
 # endif
 
 size_t	ft_strlen(const char *str);

@@ -6,66 +6,91 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/06 21:18:00 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/07 22:42:53 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=	libft.a
-CFLAGS			:=	-I./include #-Wall -Wextra -Werror -I./include
+CFLAGS			:=	-Wall -Wextra -Werror
+INCLUDE			=	-I include
 
-SRCDIR			:=	./src
-OBJDIR			:=	./obj
+OBJDIR			:=	obj
 
-STDLIB			:=	ft_atoi.c ft_calloc.c ft_free.c ft_itoa.c ft_itoa_base.c ft_realloc.c \
-					ft_strtol.c ft_xalloc.c
-STDLIBDIR		:=	$(SRCDIR)/stdlib/
-OBJS			:= 	$(addprefix $(STDLIBDIR), $(notdir $(STDLIB:%.c=%.o)))
+STDLIB			:=	src/stdlib/ft_atoi.c \
+					src/stdlib/ft_calloc.c \
+					src/stdlib/ft_free.c \
+					src/stdlib/ft_itoa.c \
+					src/stdlib/ft_itoa_base.c \
+					src/stdlib/ft_realloc.c \
+					src/stdlib/ft_strtol.c \
+					src/stdlib/ft_xalloc.c
 
-LINKEDLIST		:=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
-					ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
-LINKEDLISTDIR	:=	$(SRCDIR)/linkedlist/
-#OBJS			+= 	$(addprefix $(LINKEDLISTDIR), $(notdir $(LINKEDLIST:%.c=%.o)))
+LINKEDLIST		:=	src/linkedlist/ft_lstadd_back.c \
+					src/linkedlist/ft_lstadd_front.c \
+					src/linkedlist/ft_lstclear.c \
+					src/linkedlist/ft_lstdelone.c \
+					src/linkedlist/ft_lstiter.c \
+					src/linkedlist/ft_lstlast.c \
+					src/linkedlist/ft_lstmap.c \
+					src/linkedlist/ft_lstnew.c \
+					src/linkedlist/ft_lstsize.c
 
-STRING			:=	ft_bzero.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
-					ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
-					ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
-					ft_strtrim.c ft_substr.c
-STRINGDIR		:=	$(SRCDIR)/string/
-OBJS			+=	$(addprefix $(STRINGDIR), $(notdir $(STRING:%.c=%.o)))
+STRING			:=	src/string/ft_bzero.c \
+					src/string/ft_memchr.c \
+					src/string/ft_memcmp.c \
+					src/string/ft_memcpy.c \
+					src/string/ft_memmove.c \
+					src/string/ft_memset.c \
+					src/string/ft_split.c \
+					src/string/ft_strchr.c \
+					src/string/ft_strdup.c \
+					src/string/ft_striteri.c \
+					src/string/ft_strjoin.c \
+					src/string/ft_strlcat.c \
+					src/string/ft_strlcpy.c \
+					src/string/ft_strlen.c \
+					src/string/ft_strmapi.c \
+					src/string/ft_strncmp.c \
+					src/string/ft_strnstr.c \
+					src/string/ft_strrchr.c \
+					src/string/ft_strtrim.c \
+					src/string/ft_substr.c
 
-CTYPE			:=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_isspace.c \
-					ft_tolower.c ft_toupper.c
-CTYPEDIR		:=	$(SRCDIR)/ctype/
-OBJS			+=	$(addprefix $(CTYPEDIR), $(notdir $(CTYPE:%.c=%.o)))
+CTYPE			:=	src/ctype/ft_isalnum.c \
+					src/ctype/ft_isalpha.c \
+					src/ctype/ft_isascii.c \
+					src/ctype/ft_isdigit.c \
+					src/ctype/ft_isprint.c \
+					src/ctype/ft_isspace.c \
+					src/ctype/ft_tolower.c \
+					src/ctype/ft_toupper.c
 
-STDIO			:=	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c
-STDIODIR		:=	$(SRCDIR)/stdio/
-OBJS			+=	$(addprefix $(STDIODIR), $(notdir $(STDIO:%.c=%.o)))
-BONUS_OBJS		:= 	$(addprefix $(LINKEDLISTDIR), $(notdir $(LINKEDLIST:%.c=%.o)))
+STDIO			:=	src/stdio/ft_putchar_fd.c \
+					src/stdio/ft_putendl_fd.c \
+					src/stdio/ft_putnbr_fd.c \
+					src/stdio/ft_putstr_fd.c
 
-
-ifdef WITH_BONUS
-OBJS += $(BONUS_OBJS)
-endif
+SRCS			=	$(STDLIB) $(LINKEDLIST) $(STRING) $(CTYPE) $(STDIO)
+OBJS			=	$(SRCS:%.c=$(OBJDIR)/%.o)
+DEPS			=	$(OBJS:%.o=%.d)
 
 all:	$(NAME)
 
 $(NAME): $(OBJS)
-	@ar -rcs $(NAME) $(OBJS)
+	@ar -r $(NAME) $(OBJS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@-mkdir -p $(OBJDIR)
-	@$(CC) $(CFLAGS) -o $@ -c $<
+$(OBJDIR)/%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE)
 
 clean:
-	@$(RM) $(OBJS) $(BONUS_OBJS)
+	$(RM) $(OBJS)
 
 fclean:	clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re:	fclean $(NAME)
 
-bonus: 
-	make WITH_BONUS=1
+test:
+	./test.sh
 
-.PHONY:	all clean fclean re bonus
+.PHONY:	all clean fclean test re
