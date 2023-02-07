@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:28:39 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 03:00:06 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 03:05:24 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,44 +113,3 @@ int	split_buffer(char **stk, char **line, int loc)
 	*stk = tmp;
 	return (0);
 }
-
-// #include <libc.h>
-// #include <fcntl.h>
-// #include <stdio.h>
-//
-//__attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q a.out");
-// }
-//
-// int main(void)
-//{
-//	int fd;
-//	char *line;
-//
-//	fd = open("./files/41_no_nl", O_RDONLY);
-//	//fd = open("./files/41_with_nl", O_RDONLY);
-//	//fd = open("./files/42_no_nl", O_RDONLY);
-//	//fd = open("./files/42_with_nl", O_RDONLY);
-//	//fd = open("./files/43_no_nl", O_RDONLY);
-//	//fd = open("./files/43_with_nl", O_RDONLY);
-//	//fd = open("./files/alternate_line_nl_no_nl", O_RDONLY);
-//	//fd = open("./files/alternate_line_nl_with_nl", O_RDONLY);
-//	//fd = open("./files/big_line_no_nl", O_RDONLY);
-//	//fd = open("./files/big_line_with_nl", O_RDONLY);
-//	//fd = open("./files/empty", O_RDONLY);
-//	//fd = open("./files/multiple_line_no_nl", O_RDONLY);
-//	//fd = open("./files/multiple_line_with_nl", O_RDONLY);
-//	//fd = open("./files/multiple_nlx5", O_RDONLY);
-//	//fd = open("./files/nl", O_RDONLY);
-//
-//	while (1)
-//	{
-//		line = get_next_line(fd);
-//		//printf("%s",line);
-//		if (line == NULL)
-//			break ;
-//		free (line);
-//	}
-//	return (0);
-// }
