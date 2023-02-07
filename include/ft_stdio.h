@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:48:09 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/07 22:52:00 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 03:09:40 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 # include "ft_string.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 ssize_t	ft_putchar(char ch);
 ssize_t	ft_putchar_fd(char ch, int fd);
