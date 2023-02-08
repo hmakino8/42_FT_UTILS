@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:24:44 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 13:48:57 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:00:21 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static int	creat_buf_fd(int *fd)
 
 ssize_t	internal_printf(int *fd, const char *fmt, va_list ap)
 {
-	ssize_t	bufsize;
+	size_t	bufsize;
 	t_info	info;
 
 	if (creat_buf_fd(fd) < 0)
-		return (-1);
+		return (EOF);
 	bufsize = 0;
 	while (*fmt)
 	{
@@ -69,11 +69,12 @@ ssize_t	internal_printf(int *fd, const char *fmt, va_list ap)
 			fmt = parse_flag(fmt, &info);
 			fmt = parse_width_prec(ap, fmt, &info);
 			fmt = parse_spec(fmt, &info);
-			bufsize += process_spec(ap, *fd, &info);
+			bufsize += buf_to_fd(ap, *fd, bufsize, &info);
+			if (is_overflow(bufsize) || errno == ENOMEM)
+				return (EOF);
 		}
 		fmt++;
-		if (is_overflow(bufsize) || errno == ENOMEM)
-			return (EOF);
 	}
+	close(*fd);
 	return (bufsize);
 }

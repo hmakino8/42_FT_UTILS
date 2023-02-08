@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:34:07 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 12:40:34 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:26:55 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <stdbool.h>
 # include "ft_stdio.h"
 
-#define BUF "./printf_temp_buf"
+# define BUF "./printf_temp_buf"
 
 typedef struct s_printf_info
 {
@@ -43,7 +43,7 @@ typedef struct s_printf_info
 	size_t	prec;
 	size_t	base;
 	size_t	len;
-}		t_info;
+}	t_info;
 
 /* ft_printf.c */
 int				ft_printf(const char *fmt, ...);
@@ -52,7 +52,7 @@ int				ft_printf(const char *fmt, ...);
 int				ft_dprintf(int fd, const char *fmt, ...);
 
 /* ft_vdprintf.c */
-int 			ft_vdprintf(int fd, const char *fmt, va_list ap);
+int				ft_vdprintf(int fd, const char *fmt, va_list ap);
 
 /* internal_printf.c */
 ssize_t			internal_printf(int *fd, const char *fmt, va_list ap);
@@ -63,11 +63,11 @@ const char		*parse_width_prec(va_list ap, const char *fmt, t_info *info);
 const char		*parse_spec(const char *fmt, t_info *info);
 
 /* ft_printf-utils.c */
-bool 			is_overflow(size_t	len);
+bool			is_overflow(size_t	len);
 unsigned long	is_neg(int n, int *sign);
 char			*printf_itoa_base(unsigned long num, t_info *info);
 
 /* ft_printf-buffering.c */
-ssize_t 		process_spec(va_list ap, int fd, t_info *info);
+size_t			buf_to_fd(va_list ap, int fd, size_t bufsize, t_info *info);
 
 #endif

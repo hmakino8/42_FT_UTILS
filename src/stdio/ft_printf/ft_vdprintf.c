@@ -6,16 +6,16 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:24:44 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 13:48:39 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:16:50 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_vdprintf(int fd, const char *fmt, va_list ap)
+int	ft_vdprintf(int fd, const char *fmt, va_list ap)
 {
 	int		done;
-	int 	buf_fd;
+	int		buf_fd;
 	char	*buf;
 
 	buf = NULL;
@@ -24,10 +24,8 @@ int ft_vdprintf(int fd, const char *fmt, va_list ap)
 	{
 		if (errno != EEXIST)
 			unlink(BUF);
-		close(buf_fd);
 		return (EOF);
 	}
-	close(buf_fd);
 	buf_fd = open(BUF, O_RDONLY);
 	read(buf_fd, buf, done);
 	while (1)
@@ -38,7 +36,7 @@ int ft_vdprintf(int fd, const char *fmt, va_list ap)
 		done += ft_putstr_fd(buf, fd);
 		ft_free((void **)&buf);
 	}
-	if (unlink(BUF) < 0 || close(buf_fd) < 0 || errno == ENOMEM)
-		return (EOF);
+	close(buf_fd);
+	unlink(BUF);
 	return (done);
 }

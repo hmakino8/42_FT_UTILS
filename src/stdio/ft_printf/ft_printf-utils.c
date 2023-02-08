@@ -6,18 +6,18 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:37:34 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 13:31:09 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:17:12 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-bool 	is_overflow(size_t	len)
+bool	is_overflow(size_t	len)
 {
 	if (len > (size_t) INT_MAX)
 	{
 		errno = EOVERFLOW;
-			return (true);
+		return (true);
 	}
 	return (false);
 }

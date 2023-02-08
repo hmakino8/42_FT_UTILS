@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:36:46 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 02:40:48 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:16:27 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static const char	*conv_to_prec(const char *fmt, size_t *prec, int *len)
 	return (fmt);
 }
 
-const char *parse_flag(const char *fmt, t_info *info)
+const char	*parse_flag(const char *fmt, t_info *info)
 {
 	while (ft_strchr("-+ ", *fmt))
 	{
@@ -59,7 +59,7 @@ const char *parse_flag(const char *fmt, t_info *info)
 	return (fmt);
 }
 
-const char *parse_width_prec(va_list ap, const char *fmt, t_info *info)
+const char	*parse_width_prec(va_list ap, const char *fmt, t_info *info)
 {
 	if (*fmt == '*')
 	{

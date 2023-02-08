@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:28:39 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 16:06:49 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:25:15 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*get_next_line(int fd)
 	sig = NORMAL;
 	if (BUFFER_SIZE <= 0 || fd < 0 || OPEN_MAX < fd)
 		return (NULL);
-	if (search_line_feed(&stk[fd], &loc, &sig) < 0 ||
-		creat_buffer(&stk[fd], fd, &sig) < 0 ||
+	if (search_line_feed(&stk[fd], &loc, &sig) < 0 || \
+		creat_buffer(&stk[fd], fd, &sig) < 0 || \
 		split_buffer(&stk[fd], &line, loc) < 0)
 		return (NULL);
 	if (sig == END_OF_FILE)

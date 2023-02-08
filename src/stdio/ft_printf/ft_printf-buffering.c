@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:29:38 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 12:43:15 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:24:48 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ static size_t	buffering(char *str, int fd, t_info *info)
 	return (len);
 }
 
-static char	*spec_pct_c(va_list ap, t_info *info)
+static char	*spec_pct_c(char *str, va_list ap, t_info *info)
 {
-	char	*str;
-
 	str = ft_calloc(2, sizeof(char));
 	if (str == NULL)
 		return (NULL);
@@ -58,26 +56,25 @@ static char	*spec_pct_c(va_list ap, t_info *info)
 	return (str);
 }
 
-static char	*spec_s(va_list ap, t_info *info)
+static char	*spec_s(char *str, va_list ap, t_info *info)
 {
-	char	*str;
-
 	str = va_arg(ap, char *);
 	if (str == NULL)
 		str = (char *)"(null)";
 	if (!(info->has_prec && (!info->digit_prec || !info->prec)))
 		info->len = ft_strlen((char *)str);
-	if (info->prec > 0 && info->prec < info->len)
-		info->len = info->prec;
-	if (info->width > 0)
-		info->width -= (int)info->len;
+	if (info->len <= INT_MAX)
+	{
+		if (info->prec > 0 && info->prec < info->len)
+			info->len = info->prec;
+		if (info->width > 0)
+			info->width -= (int)info->len;
+	}
 	return (ft_strdup(str));
 }
 
-static char	*spec_i_d_u_p_x_X(va_list ap, t_info *info)
+static char	*spec_i_d_u_p_x(char *str, va_list ap, t_info *info)
 {
-	char	*str;
-
 	if (ft_strchr("id", info->spec))
 		str = printf_itoa_base(is_neg(va_arg(ap, int), &info->sign), info);
 	if (ft_strchr("uxX", info->spec))
@@ -90,10 +87,11 @@ static char	*spec_i_d_u_p_x_X(va_list ap, t_info *info)
 		info->len = 0;
 	if (info->width > 0)
 	{
+		info->width -= (0 < info->sign) + info->flag_space;
 		if (info->prec && info->len < info->prec)
-			info->width -= ((int)info->prec + (0 < info->sign) + info->flag_space);
+			info->width -= (int)info->prec;
 		else
-			info->width -= (info->len + (0 < info->sign) + info->flag_space);
+			info->width -= info->len;
 	}
 	if (info->len < info->prec)
 	{
@@ -103,23 +101,26 @@ static char	*spec_i_d_u_p_x_X(va_list ap, t_info *info)
 	return (str);
 }
 
-ssize_t 	process_spec(va_list ap, int fd, t_info *info)
+size_t	buf_to_fd(va_list ap, int fd, size_t bufsize, t_info *info)
 {
 	size_t	len;
 	char	*str;
 
 	str = NULL;
-	if (ft_strchr("%c", info->spec))
-		str = spec_pct_c(ap, info);
-	else if (info->spec == 's')
-		str = spec_s(ap, info);
-	else if (ft_strchr("idupxX", info->spec))
-		str = spec_i_d_u_p_x_X(ap, info);
-	else
+	if (!ft_strchr("%csidupxX", info->spec))
 		return (0);
+	if (info->spec == '%' || info->spec == 'c')
+		str = spec_pct_c(str, ap, info);
+	else if (info->spec == 's')
+		str = spec_s(str, ap, info);
+	else
+		str = spec_i_d_u_p_x(str, ap, info);
 	if (str == NULL)
-		return (-1);
-	len = buffering(str, fd, info);
+		return (0);
+	if (bufsize + info->len > (size_t) INT_MAX)
+		len = info->len;
+	else
+		len = buffering(str, fd, info);
 	ft_free((void **)&str);
 	return (len);
 }

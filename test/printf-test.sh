@@ -5,4 +5,5 @@ gcc ../libft.a printf-test.c -I../include -D FT_PRINTF -o ft_printf
 ./ft_printf > ft_printf.txt
 diff -a --suppress-common-lines printf.txt ft_printf.txt
 rm -rf printf ft_printf printf.txt ft_printf.txt
+rm printf_temp_buf
 make fclean -C ../
