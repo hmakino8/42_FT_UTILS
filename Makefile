@@ -6,13 +6,13 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/08 02:52:46 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/08 13:37:35 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=	libft.a
 CFLAGS			:=	-Wall -Wextra -Werror
-INCLUDE			=	-I include
+INCLUDE			=	-I./include
 
 OBJDIR			:=	obj
 

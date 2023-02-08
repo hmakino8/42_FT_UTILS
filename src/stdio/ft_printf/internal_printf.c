@@ -6,11 +6,11 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:24:44 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 02:56:27 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 13:48:57 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/ft_printf.h"
+#include "ft_printf.h"
 
 static void	init_info(t_info *info)
 {
@@ -31,7 +31,7 @@ static void	init_info(t_info *info)
 	info->len = 0;
 }
 
-static int	creat_fd(int *fd)
+static int	creat_buf_fd(int *fd)
 {
 	int			e;
 	struct stat	st;
@@ -55,7 +55,7 @@ ssize_t	internal_printf(int *fd, const char *fmt, va_list ap)
 	ssize_t	bufsize;
 	t_info	info;
 
-	if (creat_fd(fd) < 0)
+	if (creat_buf_fd(fd) < 0)
 		return (-1);
 	bufsize = 0;
 	while (*fmt)

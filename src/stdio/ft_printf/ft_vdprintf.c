@@ -6,16 +6,16 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:24:44 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 02:39:51 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 13:48:39 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/ft_printf.h"
+#include "ft_printf.h"
 
 int ft_vdprintf(int fd, const char *fmt, va_list ap)
 {
-	int 	buf_fd;
 	int		done;
+	int 	buf_fd;
 	char	*buf;
 
 	buf = NULL;

@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 04:29:38 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 02:57:52 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 12:43:15 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static char	*spec_i_d_u_p_x_X(va_list ap, t_info *info)
 	char	*str;
 
 	if (ft_strchr("id", info->spec))
-		str = printf_itoa_base(is_neg(va_arg(ap, int), info), info);
+		str = printf_itoa_base(is_neg(va_arg(ap, int), &info->sign), info);
 	if (ft_strchr("uxX", info->spec))
 		str = printf_itoa_base(va_arg(ap, unsigned int), info);
 	if (info->spec == 'p')

@@ -6,7 +6,7 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:28:39 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/08 03:05:24 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:06:49 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ char	*get_next_line(int fd)
 
 	line = NULL;
 	sig = NORMAL;
-	if (BUFFER_SIZE <= 0 || fd < 0 || OPEN_MAX < fd ||
-		search_line_feed(&stk[fd], fd, &loc, &sig) < 0 ||
+	if (BUFFER_SIZE <= 0 || fd < 0 || OPEN_MAX < fd)
+		return (NULL);
+	if (search_line_feed(&stk[fd], &loc, &sig) < 0 ||
+		creat_buffer(&stk[fd], fd, &sig) < 0 ||
 		split_buffer(&stk[fd], &line, loc) < 0)
 		return (NULL);
 	if (sig == END_OF_FILE)
@@ -35,43 +37,57 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	joint_buffer(char **stk, char *buf)
+static char	*remove_null_char(char *buf, ssize_t byte)
 {
+	ssize_t	i;
+	ssize_t	j;
+
+	if (byte <= 0)
+		return (buf);
+	i = 0;
+	j = 0;
+	while (j < byte)
+	{
+		if (buf[j] == '\0')
+			j++;
+		buf[i] = buf[j];
+		i++;
+		j++;
+	}
+	buf[i] = '\0';
+	return (buf);
+}
+
+int	creat_buffer(char **stk, int fd, int *sig)
+{
+	ssize_t	byte;
+	char	*buf;
 	char	*tmp;
 
+	buf = ft_calloc(BUFFER_SIZE + 1UL, sizeof(char));
+	if (buf == NULL)
+		return (free_error_exit(*stk));
+	byte = read(fd, buf, BUFFER_SIZE);
+	buf = remove_null_char(buf, byte);
+	if (byte == 0)
+		*sig = END_OF_FILE;
+	if (byte < 0)
+	{
+		free(buf);
+		free(*stk);
+		return (-1);
+	}
 	tmp = ft_strjoin(*stk, buf);
 	free(*stk);
 	free(buf);
 	*stk = NULL;
-	buf = NULL;
 	if (tmp == NULL)
 		return (-1);
 	*stk = tmp;
 	return (0);
 }
 
-int	load_buffer(char **stk, int fd, int *sig)
-{
-	ssize_t	byte;
-	char	*buf;
-
-	buf = ft_calloc(BUFFER_SIZE + 1UL, sizeof(char));
-	if (buf == NULL)
-		return (free_error_exit(*stk));
-	byte = read(fd, buf, BUFFER_SIZE);
-	if (byte <= 0)
-	{
-		free(buf);
-		buf = NULL;
-		if (byte < 0)
-			return (free_error_exit(*stk));
-		else
-			*sig = END_OF_FILE;
-	}
-	return (joint_buffer(stk, buf));
-}
-
-int	search_line_feed(char **stk, int fd, int *loc, int *sig)
+int	search_line_feed(char **stk, int *loc, int *sig)
 {
 	char	*tmp;
 
@@ -84,10 +100,7 @@ int	search_line_feed(char **stk, int fd, int *loc, int *sig)
 	{
 		tmp = ft_strchr(*stk, '\n');
 		if (tmp == NULL)
-		{
-			if (load_buffer(stk, fd, sig) < 0)
-				return (-1);
-		}
+			break ;
 		else
 			*loc = tmp - *stk + 1;
 	}
