@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gnl-test.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 01:22:46 by hiroaki           #+#    #+#             */
-/*   Updated: 2023/02/08 01:41:13 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/09 18:19:41 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
  int main(void)
 {
-	int fd;
-	char *line;
+	char	*buf;
+	int		fd;
+	char	*line;
 
 	printf("\nTEST1 ===============================\n");
 	fd = open("./files/41_no_nl", O_RDONLY);
@@ -165,7 +166,7 @@
 	close(fd);
 
 	return (0);
- }
+}
 
 __attribute__((destructor))
  static void destructor() {

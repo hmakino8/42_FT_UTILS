@@ -6,7 +6,7 @@
 #    By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/06 17:10:58 by hiroaki           #+#    #+#              #
-#    Updated: 2023/02/08 13:37:35 by hiroaki          ###   ########.fr        #
+#    Updated: 2023/02/10 16:37:36 by hiroaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ STDIO			:=	src/stdio/ft_putchar_fd.c \
 					src/stdio/ft_printf/ft_printf-parse.c \
 					src/stdio/ft_printf/ft_printf-utils.c \
 					src/stdio/ft_printf/ft_printf-buffering.c
+					#src/stdio/get_next_line/get_next_line_utils.c \
 
 SRCS			=	$(STDLIB) $(LINKEDLIST) $(STRING) $(CTYPE) $(STDIO)
 OBJS			=	$(SRCS:%.c=$(OBJDIR)/%.o)

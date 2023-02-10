@@ -6,20 +6,12 @@
 /*   By: hiroaki <hiroaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 04:36:17 by hmakino           #+#    #+#             */
-/*   Updated: 2023/02/10 16:50:11 by hiroaki          ###   ########.fr       */
+/*   Updated: 2023/02/09 19:21:35 by hiroaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <fcntl.h>
-# include <limits.h>
-# include "ft_string.h"
-# include "ft_stdlib.h"
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 256
@@ -29,12 +21,36 @@
 #  define BUFFER_SIZE 1024
 # endif
 
-# define NORMAL 0
-# define END_OF_FILE 1
+# define NORMAL 1
+# define END_OF_FILE 0
+# define ERROR -1
+# define MALLOC_FAILURE -2
 
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <limits.h>
+
+typedef struct s_gnl_info
+{
+	int			fd;
+	int			signal;
+	ssize_t		byte;
+	size_t		locate;
+	char		*rtn_line;
+	char		*buf;
+}	t_gnl_info;
+
+//get_next_line.c
 char	*get_next_line(int fd);
-int		creat_buffer(char **stk, int fd, int *sig);
-int		search_linefeed(char **stk, int fd, int *loc, int *sig);
-int		split_buffer(char **stk, char **line, int loc);
+int		locate_line_feed(char **stock, t_gnl_info *i);
+void	load_buffer(char **stock, t_gnl_info *i);
+void	joint_buffer(char **stock, t_gnl_info *i);
+void	split_buffer(char **stock, t_gnl_info *i);
+//get_next_line_utils.c
+size_t	get_len(const char *s);
+char	*gnl_strchr(char *s, int c);
+char	*gnl_substr(char const *s, size_t start, size_t len, t_gnl_info *i);
+char	*gnl_strjoin(char const *s1, char const *s2, t_gnl_info *i);
 
 #endif
