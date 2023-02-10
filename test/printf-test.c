@@ -93,12 +93,12 @@ int	main(void)
 	len += F("%%--.%#xp                   : [%%--.%#xp]\n", 0);
 
 	printf("totallen = %zd\n", len);
-	//char *intmaxlen;
+	char *intmaxlen;
 
-	//intmaxlen = malloc((size_t)INT_MAX + 1);
-	//intmaxlen[INT_MAX] = '\0';
-	//memset(intmaxlen, 'b', INT_MAX);
-	//printf("intmaxlen + 1            : %d", F("a%s", intmaxlen));
+	intmaxlen = malloc((size_t)INT_MAX + 1);
+	intmaxlen[INT_MAX] = '\0';
+	memset(intmaxlen, 'b', INT_MAX);
+	printf("intmaxlen + 1            : %d", F("a%s", intmaxlen));
 	//printf("--------------未定義----------------\n");
 	//printf("0s : [%*.*s]\n", 10, 8, "hmakino");
 	//printf("+s : [%+s]\n", "hmakino");//変換指定子sかつ+フラグ未定義
